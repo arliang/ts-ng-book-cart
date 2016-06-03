@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>BookList</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+  <script src="http://cdn.bootcss.com/angular.js/1.4.3/angular.js"></script>
+  <script src="app.js"></script>
+</head>
+
+<body>
+  <div ng-controller="Main as vm">
+    <button ng-click="showBookListOuter()">show outer list</button>
+    <div ng-if="vm.outerList && !vm.innerBookList">
+      <ul>
+        <li ng-repeat="book in vm.outerList track by $index"><input type="checkbox">{{book.name}}</li>
+      </ul>
+      <button ng-click="vm.showBookListInner()">select from inner list</button>
+      <button ng-click="vm.saveBooks()">save books</button>
+    </div>
+    <div ng-if="vm.innerBookList">
+      <ul>
+        <li ng-repeat="book in vm.innerBookList track by $index">
+          <input type="checkbox" ng-model="selected"
+            ng-change="selected ? vm.innerBookList.addToSelectList(book) : vm.innerBookList.removeFromSelectList(book)"
+          >{{book.name}}
+        </li>
+      </ul>
+      <button onclick="vm.outerList.add(vm.innerList.getSelectedBookList()); vm.innerList = null">save to outer list</button>
+    </div>
+  </div>
+</body>
+
+</html>
