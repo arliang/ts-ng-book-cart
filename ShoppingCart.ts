@@ -1,6 +1,6 @@
+/// <reference path="angular.d.ts" />
 import {Book} from './Book'
 import {Data} from './Data'
-import {angular} from './angular'
 
 class Remote {
   static lists: Book[][]
